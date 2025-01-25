@@ -36,6 +36,7 @@ def delete_article(db: Session, article_id: int):
     article = db.query(Article).filter(Article.id == article_id).first()
     if not article:
         raise HTTPException(status_code=404, detail="Article not found")
+
     db.delete(article)
     db.commit()
     return {"message": "Article deleted successfully"}
