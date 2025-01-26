@@ -2,7 +2,23 @@ from sqlalchemy.orm import Session
 from fastapi import HTTPException
 from app.models import Article, Source
 from app.schemas import ArticleCreate
+from datetime import datetime
 
+
+def get_or_create_source(db: Session, name: str):
+    source = db.query(Source).filter(Source.name == name).first()
+    if not source:
+        source = Source(name=name)
+        db.add(source)
+        db.commit()
+        db.refresh(source)
+    return source
+def create_Scraping_article(db: Session, title: str, content: str, publish_date: datetime, source_id: int):
+    article = Article(title=title, content=content, publish_date=publish_date, source_id=source_id)
+    db.add(article)
+    db.commit()
+    db.refresh(article)
+    return 
 def create_article(db: Session, article: ArticleCreate):
     db_source = db.query(Source).filter(Source.id == article.source_id).first()
     if not db_source:

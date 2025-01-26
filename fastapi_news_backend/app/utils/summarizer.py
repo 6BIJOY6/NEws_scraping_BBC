@@ -4,9 +4,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 # Print the current working directory for debugging
-print(f"Current working directory: {os.getcwd()}")
-gro_api_key = os.getenv("GROQ_API_KEY")
-
+# print(f"Current working directory: {os.getcwd()}")
+# gro_api_key = os.getenv("GROQ_API_KEY")
+gro_api_key = "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"
 print(f"GROQ_API_KEY: {gro_api_key}")
 if not gro_api_key:
     raise ValueError("GROQ_API_KEY is not set. Please ensure it's set in the .env file.")
