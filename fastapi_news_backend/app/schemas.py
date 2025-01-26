@@ -28,3 +28,24 @@ class ArticleResponse(ArticleBase):
 
     class Config:
         orm_mode = True
+
+
+class SummaryFast(BaseModel):
+    article_id: int  # correct the key to article_id
+
+    class Config:
+        orm_mode = True
+
+class SummaryResponse(BaseModel):
+    id: int
+    article_id: int  # corrected to article_id
+    summary: str  # corrected to summary_text
+    created_at: datetime
+    class Config:
+        orm_mode = True
+
+class SummaryListResponse(BaseModel):
+    summaries: List[SummaryResponse]
+
+    class Config:
+        orm_mode = True

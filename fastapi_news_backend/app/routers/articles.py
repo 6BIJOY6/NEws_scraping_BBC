@@ -7,6 +7,7 @@ from app.crud.articles import (
 )
 from typing import List
 
+
 router = APIRouter()
 
 @router.post("/", response_model=ArticleResponse)
@@ -28,3 +29,5 @@ def update_article_endpoint(article_id: int, updated_article: ArticleCreate, db:
 @router.delete("/{article_id}")
 def delete_article_endpoint(article_id: int, db: Session = Depends(get_db)):
     return delete_article(db, article_id)
+
+    

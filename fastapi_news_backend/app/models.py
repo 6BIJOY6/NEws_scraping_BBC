@@ -3,6 +3,20 @@ from sqlalchemy.orm import relationship
 from app.database import Base
 from datetime import datetime
 
+
+
+class Summary(Base):
+    __tablename__ = "summaries"
+
+    id = Column(Integer, primary_key=True, index=True)
+    article_id = Column(Integer, ForeignKey("articles.id"), nullable=False, unique=True)
+    summary = Column(Text, nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    # Relationship to the articles table
+    article = relationship("Article", back_populates="summary")
+
+
 class Source(Base):
     __tablename__ = "sources"
 
@@ -24,3 +38,4 @@ class Article(Base):
 
     # Relationship to the source table
     source = relationship("Source", back_populates="articles")
+    summary = relationship("Summary", uselist=False, back_populates="article")
